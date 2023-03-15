@@ -1,0 +1,19 @@
+{
+  "name": "employee-tracker",
+  "version": "1.0.0",
+  "description": "a command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mynamebrogrammer/Employee-tracker.git"
+  },
+  "author": "Habib Maksoud",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mynamebrogrammer/Employee-tracker/issues"
+  },
+  "homepage": "https://github.com/mynamebrogrammer/Employee-tracker#readme"
+}
