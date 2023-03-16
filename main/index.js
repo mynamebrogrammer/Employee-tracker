@@ -1,6 +1,8 @@
 const inquirer = require("inquirer");
 const db = require("../config/connection");
 
+const PORT = process.env.PORT || 3001;
+
 inquirer
   .prompt([
     {
@@ -21,10 +23,10 @@ inquirer
     },
   ])
   .then((answers) => {
-    console.info("Answer:", answers.menu);
+    console.info("You selected:", answers.menu);
     switch (answers.menu) {
       case "View departments":
-        db.query("SELECT * FROM department", (err, rows) => {
+        db.query("SELECT * FROM departments", (err, rows) => {
           if (err) {
             console.log(err);
           } else {
@@ -33,7 +35,7 @@ inquirer
         });
         break;
       case "View roles":
-        db.query("SELECT * FROM role", (err, rows) => {
+        db.query("SELECT * FROM roles", (err, rows) => {
           if (err) {
             console.log(err);
           } else {
@@ -42,7 +44,7 @@ inquirer
         });
         break;
       case "View employees":
-        db.query("SELECT * FROM employee", (err, rows) => {
+        db.query("SELECT * FROM employees", (err, rows) => {
           if (err) {
             console.log(err);
           } else {
@@ -64,7 +66,7 @@ inquirer
             console.info("Answer:", answers.department);
             try {
               db.query(
-                "INSERT INTO department (name) VALUES (?)",
+                "INSERT INTO departments (dept_name) VALUES (?)",
                 [answers.department],
                 (err, rows) => {
                   if (err) {
@@ -104,7 +106,7 @@ inquirer
             console.info("Answer:", answers.salary);
             console.info("Answer:", answers.department_id);
             db.query(
-              `INSERT INTO role (title, salary, department_id) VALUES ('${answers.title}', '${answers.salary}', '${answers.department_id}')`,
+              "INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)",
               (err, rows) => {
                 if (err) {
                   console.log(err);
@@ -149,7 +151,7 @@ inquirer
             console.info("Answer:", answers.role_id);
             console.info("Answer:", answers.manager_id);
             db.query(
-              `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${answers.first_name}', '${answers.last_name}', '${answers.role_id}', '${answers.manager_id}')`,
+              `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ('${answers.first_name}', '${answers.last_name}', '${answers.role_id}', '${answers.manager_id}')`,
               (err, rows) => {
                 if (err) {
                   console.log(err);
@@ -180,7 +182,7 @@ inquirer
             console.info("Answer:", answers.id);
             console.info("Answer:", answers.role_id);
             db.query(
-              `UPDATE employee SET role_id = '${answers.role_id}' WHERE id = '${answers.id}'`,
+              `UPDATE employees SET role_id = '${answers.role_id}' WHERE id = '${answers.id}'`,
               (err, rows) => {
                 if (err) {
                   console.log(err);
