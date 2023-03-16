@@ -31,7 +31,6 @@ const cTable = require("console.table");
               if (err) {
                 console.log(err);
               } else {
-                console.log("Success");
                 console.table(rows);
                 start();
               }
@@ -43,7 +42,6 @@ const cTable = require("console.table");
                 console.log(err);
                 console.log("Error");
               } else {
-                console.log("Success");
                 console.table(rows);
                 start();
               }
@@ -117,6 +115,7 @@ const cTable = require("console.table");
                 console.info("Answer:", answers.department_id);
                 db.query(
                   "INSERT INTO roles (title, salary, department_id) VALUES (?, ?, ?)",
+                  [answers.title, answers.salary, answers.department_id],
                   (err, rows) => {
                     if (err) {
                       console.log(err);
@@ -153,7 +152,7 @@ const cTable = require("console.table");
                   type: "input",
                   name: "manager_id",
                   message:
-                    "Who is the manager of the employee you would like to add?",
+                    "What is the manager id of the employee you would like to add?",
                 },
               ])
               .then((answers) => {
@@ -162,12 +161,14 @@ const cTable = require("console.table");
                 console.info("Answer:", answers.role_id);
                 console.info("Answer:", answers.manager_id);
                 db.query(
-                  `INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES ('${answers.first_name}', '${answers.last_name}', '${answers.role_id}', '${answers.manager_id}')`,
+                  "INSERT INTO employees (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)",
+                  [answers.first_name, answers.last_name, answers.role_id, answers.manager_id],
                   (err, rows) => {
                     if (err) {
                       console.log(err);
                     } else {
                       console.table(rows);
+                      start();
                     }
                   }
                 );
@@ -193,12 +194,14 @@ const cTable = require("console.table");
                 console.info("Answer:", answers.id);
                 console.info("Answer:", answers.role_id);
                 db.query(
-                  `UPDATE employees SET role_id = '${answers.role_id}' WHERE id = '${answers.id}'`,
+                  "UPDATE employees SET role_id = ? WHERE id = ?",
+                  [answers.role_id, answers.id],
                   (err, rows) => {
                     if (err) {
                       console.log(err);
                     } else {
                       console.table(rows);
+                      start();
                     }
                   }
                 );
