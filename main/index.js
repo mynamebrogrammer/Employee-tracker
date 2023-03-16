@@ -1,5 +1,6 @@
 const inquirer = require("inquirer");
 const db = require("../config/connection");
+const cTable = require("console.table");
 
 const PORT = process.env.PORT || 3001;
 
@@ -11,9 +12,9 @@ inquirer
       name: "menu",
       message: "What would you like to do?",
       choices: [
-        "View departments",
-        "View roles",
-        "View employees",
+        "View all departments",
+        "View all roles",
+        "View all employees",
         "Add department",
         "Add role",
         "Add employee",
@@ -25,7 +26,7 @@ inquirer
   .then((answers) => {
     console.info("You selected:", answers.menu);
     switch (answers.menu) {
-      case "View departments":
+      case "View all departments":
         db.query("SELECT * FROM departments", (err, rows) => {
           if (err) {
             console.log(err);
