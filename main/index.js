@@ -1,7 +1,6 @@
 const inquirer = require("inquirer");
 const db = require("../config/connection");
 const cTable = require("console.table");
-
   // prompt the user to select from a list of options
   function start() {
     inquirer

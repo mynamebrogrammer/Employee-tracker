@@ -30,12 +30,18 @@ To install necessary dependencies, run the following commands:
 
 ## Usage
 
-Before running the application, ensure that you have MySQL installed on your computer. Once you have MySQL installed, run the schema.sql and seeds.sql files in your MySQL Workbench to create the database and populate the tables. Then, run
+Before running the application, ensure that you have MySQL installed on your computer. Once you have MySQL installed, run the schema.sql and seeds.sql files in your MySQL Workbench to create the database and populate the tables.
+
+```mysql -u root -p``` then enter your password
+```source db/schema.sql``` then ```source db/seeds.sql```
 
 ```npm start``` or cd into the main folder and run ```node index.js```
 
 ## Demo
 
+![Demo](./assets/employee1.png)
+
+[Watch here](https://youtu.be/EUYSHcOiwqQ)
 
 ## Contributing
 
